@@ -1,63 +1,42 @@
 package com.example.forumapi.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
+
+@Entity
+@Table(name = "USER")
+@Component
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private int id;
+
+    @NotNull
+    @Column(name = "USERNAME",unique = true)
     private String username;
+
+    @NotNull
+    @Column(name = "PASSWORD")
     private String password;
+
+    @NotNull
+    @Column(name = "EMAIL",unique = true)
+    @Pattern(regexp = "\\w+([\\.-]?\\w+)@\\w+([\\.-]?\\w+)(\\.\\w{2,3})")
     private String email;
+
+    @Column(name = "NROFMESSAGES")
     private int nrOfMessages;
+
+    @Column(name = "NROFTOPICS")
     private int nrOfTopics;
-
-    public User(int id, String username, String password, String email, int nrOfMessages, int nrOfTopics) {
-        this.id=id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.nrOfMessages = nrOfMessages;
-        this.nrOfTopics = nrOfTopics;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getNrOfMessages() {
-        return nrOfMessages;
-    }
-
-    public void setNrOfMessages(int nrOfMessages) {
-        this.nrOfMessages = nrOfMessages;
-    }
-
-    public int getNrOfTopics() {
-        return nrOfTopics;
-    }
-
-    public void setNrOfTopics(int nrOfTopics) {
-        this.nrOfTopics = nrOfTopics;
-    }
 }
